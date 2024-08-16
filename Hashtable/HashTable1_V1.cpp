@@ -56,7 +56,7 @@ class Linklist{
 };
 
 int main(){
-	Linklist l[17]
+	Linklist l[17];
 	char ch;
 	do{
 		cin>>ch;
