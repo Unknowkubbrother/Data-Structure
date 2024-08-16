@@ -1,6 +1,5 @@
-   #include <iostream>
+#include <iostream>
 #include <algorithm>
-#include <cmath>
 using namespace std;
 
 class process {
@@ -52,9 +51,9 @@ public:
     }
 };
 
-bool compareSort(process a, process b) {
-    return a.at < b.at;
-}
+//bool compareSort(process a, process b) {
+//    return a.at < b.at;
+//} ใช้ในการเรียงข้อมูลของ algorithm
 
 int main() {
     int size;
@@ -68,7 +67,18 @@ int main() {
         p[i] = process(id, at, st);
         serviceTimeAll += st;
     }
-    sort(p, p + size, compareSort);
+//    sort(p, p + size, compareSort); ใช้ในการเรียงข้อมูลของ algorithm
+	for(int i=0;i<size;i++){ //ใช้วิธี bubble sort
+		process temp;
+		for(int j=i;j>0;j--){
+			if (p[j].at < p[j-1].at){
+				temp = p[j];
+				p[j] = p[j-1];
+				p[j-1] = temp;
+			}
+		}
+
+	}
     int round = 0;
     while (round < serviceTimeAll) {
         for (int i = 0; i < size; i++) {
@@ -79,13 +89,13 @@ int main() {
         }
         while (!s->empty()) {
         	process temp = s->pop();
-        	for(int i=0;i<temp.st ;i++){
-        		cout<<temp.id<<":"<<temp.st-i<<endl;
+        	for(int i=temp.st;i>0 ;i--){
+        		cout<<temp.id<<":"<<temp.st<<endl;
+        		temp.st--;
         		round++;
 			}
     	}
 	}
-
     return 0;
 }
 
