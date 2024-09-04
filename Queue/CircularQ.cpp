@@ -24,9 +24,7 @@ class Queue{
 		
 		int dequeue(){
 			if (!empty()){
-				int temp = this->arr[head%size];
-				head++;
-				return temp;
+				return this->arr[head++%size];
 			}
 		}
 		
@@ -62,7 +60,7 @@ class Queue{
 };
 
 int main(){
-	Queue *q = new Queue(8);
+	Queue *q = new Queue(2);
 	char ch;
 	do{
 		cin>>ch;

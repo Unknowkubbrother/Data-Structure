@@ -28,7 +28,7 @@ class Stack{
 		
 		
 		bool full(){
-			if (top > size){
+			if (top >= size-1){
 				return true;
 			}
 			return false;

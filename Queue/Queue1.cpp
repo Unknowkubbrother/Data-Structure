@@ -34,7 +34,7 @@ class Queue{
 	
 	
 	bool full(){
-		if (tail == size){
+		if (tail == size - 1){
 			return true;
 		}
 		return false;
@@ -58,7 +58,7 @@ class Queue{
 };
 
 int main(){
-	Queue *q = new Queue(8);
+	Queue *q = new Queue(2);
 	char ch;
 	do{
 		cin>>ch;
