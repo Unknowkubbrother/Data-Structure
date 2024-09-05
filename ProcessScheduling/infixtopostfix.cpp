@@ -82,7 +82,7 @@ int main(){
 				}
 			}
 		}else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^'){
-    		while(!(s->empty()) && precedence(s->arr[s->top]) >= precedence(c)){
+    		while(!(s->empty()) && precedence(c) <= precedence(s->arr[s->top])){
     			result += s->pop();
 			}
 			s->push(c);
