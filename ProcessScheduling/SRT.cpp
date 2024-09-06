@@ -53,7 +53,7 @@ int main(){
 			cout<<temp.id<<" : "<<temp.st<<endl;
 			temp.st--;
 			round++;
-			while(i < size && p[i].at <= round){
+			if(i < size && p[i].at == round){
 				q.push_back(p[i]);
 				i++;
 			}
