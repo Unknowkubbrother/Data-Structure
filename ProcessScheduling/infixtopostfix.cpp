@@ -91,11 +91,7 @@ int main(){
 		}
 	}
 	while(!s->empty()){
-		if (s->arr[s->top] != '(' && s->arr[s->top] != ')'){
-			result+=s->pop();
-		}else{
-			s->pop();
-		}
+		result+=s->pop();
 	}
 	cout<<result<<endl;
 	

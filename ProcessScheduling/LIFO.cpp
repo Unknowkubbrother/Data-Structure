@@ -80,7 +80,7 @@ int main() {
 
 	}
     int round = 0;
-    while (round <= serviceTimeAll) {
+    while (round < serviceTimeAll) {
         for (int i = 0; i < size; i++) {
             if (p[i].at <= round && p[i].at != -1) {
                s->push(p[i]);

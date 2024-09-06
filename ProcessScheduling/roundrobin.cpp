@@ -39,12 +39,12 @@ int main(){
 	
 	sort(p, p + size, compareSort);
 	
-	int round = 0;
+	int round = 0,i=0;
 	q.push(p[0]);
-	p[0].at = -1;
+	i++;
 	
-	while(round <= serviceTimeAll){
-		while(!q.empty()){
+	while(round < serviceTimeAll){
+		if(!q.empty()){
 			process temp = q.front();
 			q.pop();
 			
@@ -56,11 +56,9 @@ int main(){
 				}
 			}
 			
-			for(int i=0;i<size;i++){
-				if (p[i].at <= round && p[i].at != -1){
-					q.push(p[i]);
-					p[i].at = -1;
-				}
+			while(i < size && p[i].at <= round){
+				q.push(p[i]);
+				i++;
 			}
 			
 			if(temp.st > 0){
