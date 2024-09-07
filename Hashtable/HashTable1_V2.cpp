@@ -46,7 +46,7 @@ class separate_chaining{
 		
 		void print(){
 			for(int i=0;i<n;i++){
-				Node *temp = hash_table+i;
+				Node *temp = hash_table+i
 				while(temp != NULL){
 					cout<<"("<<temp->key<<","<<temp->value<<")"<<" ";
 					temp = temp->next;

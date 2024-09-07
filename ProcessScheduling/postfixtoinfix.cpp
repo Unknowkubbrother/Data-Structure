@@ -1,6 +1,18 @@
 #include <iostream>
 #include <stack>
 #include <string>
+//
+//#include <stdlib.h>
+//atoi(string);
+
+//#include <sstream>
+//string s = "12345";
+//stringstream geek;
+//geek << s;
+//int x = 0;
+//geek >> x;
+//cout << "Value of x + 1 : " << x + 1;
+
 using namespace std;
 
 class Stack{
