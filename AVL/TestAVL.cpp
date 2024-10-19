@@ -15,8 +15,8 @@ class Node{
 		}
 };
 
-int max (int a , int b){
-	return (a>b) ? a : b;
+int max (int a, int b){
+	return a > b ? a : b;
 }
 
 int height(Node *root){
@@ -24,12 +24,8 @@ int height(Node *root){
 		return -1;
 	}
 	
-	int heightLeft = height(root->left);
-	int heightRight = height(root->right);
-	
-	return max( heightLeft ,heightRight ) + 1;
+	return max(height(root->left),height(root->right)) +1;
 }
-
 
 int getBalance(Node *root){
 	if (root == NULL){
@@ -48,7 +44,6 @@ Node *rotateRight(Node *n){
 	
 	return left;
 }
-
 
 Node *rotateLeft(Node *n){
 	Node *right = n->right;
@@ -84,43 +79,52 @@ Node *balance(Node *root){
 	return root;
 }
 
-
-Node *insert(Node *root,int data){
+Node *insert(Node *root, int data){
 	if (root == NULL){
 		return new Node(data);
 	}
 	
 	if (data < root->data){
 		root->left = insert(root->left,data);
-	}else if (data >= root->data){
+	}else if(data >= root->data){
 		root->right = insert(root->right,data);
 	}
 	
 	return balance(root);
 }
 
-void preOrder(Node *root){
-	if (root != NULL){
-		cout<<root->data<<",";
-		preOrder(root->left);
-		preOrder(root->right);
+Node *findmin(Node *root){
+	while (root->left != NULL){
+		root = root->left;
 	}
+	
+	return root;
 }
 
-void inOrder(Node *root){
-	if (root != NULL){
-		inOrder(root->left);
-		cout<<root->data<<",";
-		inOrder(root->right);
+Node *removeNode(Node *root, int data){
+	if (root == NULL){
+		return root;
 	}
-}
-
-void postOrder(Node *root){
-	if (root !=  NULL){
-		postOrder(root->left);
-		postOrder(root->right);
-		cout<<root->data<<",";
+	
+	if (data < root->data){
+		root->left = removeNode(root->left,data);
+	}else if(data > root->data){
+		root->right = removeNode(root->right,data);
+	}else{
+		if (root->left == NULL && root->right == NULL){
+			root = NULL;
+		}else if (root->left != NULL && root->right == NULL){
+			root = root->left;
+		}else if (root->right != NULL && root->left == NULL){
+			root = root->right;
+		}else{
+			Node *temp = findmin(root->right);
+			root->data = temp->data;
+			root->right = removeNode(root->right,temp->data);
+		}
 	}
+	
+	return balance(root);
 }
 
 void btf(Node *root){
@@ -137,9 +141,9 @@ void btf(Node *root){
 			Node *temp = q.front();
 			q.pop();
 			
-			cout<<temp->data<<",";
+			cout<<temp->data<<" ";
 			
-			if(temp->left != NULL){
+			if (temp->left != NULL){
 				q.push(temp->left);
 			}
 			
@@ -149,40 +153,31 @@ void btf(Node *root){
 		}
 		cout<<"|";
 	}
-}
-Node *findMin(Node *root){
-	while(root->left != NULL){
-		root = root->left;
-	}
 	
-	return root;
 }
 
-Node *removeNode(Node *root, int data){
-	if (root == NULL){
-		return root;
+void preOrder(Node *root){
+	if (root != NULL){
+		cout<<root->data<<" ";
+		preOrder(root->left);
+		preOrder(root->right);
 	}
-	
-	if (data < root->data){
-		root->left = removeNode(root->left,data);
-	}else if(data > root->data){
-		root->right = removeNode(root->right,data);
-	}else {
-		if (root->left == NULL && root->right == NULL){
-			root = NULL;
-		}else if (root->left != NULL && root->right == NULL){
-			root = root->left;
-		}else if (root->left == NULL && root->right != NULL){
-			root = root->right;
-		}else{
-			
-			Node *temp = findMin(root->right);
-			root->data = temp->data;
-			root->right = removeNode(root->right,temp->data);
-		}
+}
+
+void inOrder(Node *root){
+	if (root != NULL){
+		inOrder(root->left);
+		cout<<root->data<<" ";
+		inOrder(root->right);
 	}
-	
-	return balance(root);
+}
+
+void postOrder(Node *root){
+	if (root != NULL){
+		postOrder(root->left);
+		postOrder(root->right);
+		cout<<root->data<<" ";
+	}
 }
 
 int main(){
@@ -190,29 +185,29 @@ int main(){
 	char ch;
 	do{
 		cin>>ch;
-		if (ch == 'a'){
-			int data;
-			cin>>data;
-			root = insert(root,data);
+		if (ch ==  'a'){
+			int num;
+			cin>>num;
+			root = insert(root,num);
+		}else if(ch == 'b'){
+			btf(root);
+			cout<<endl;
 		}else if (ch == 'i'){
 			inOrder(root);
-			cout<<endl;
-		}else if (ch == 't'){
-			postOrder(root);
 			cout<<endl;
 		}else if (ch == 'p'){
 			preOrder(root);
 			cout<<endl;
-		}else if (ch == 'b'){
-			btf(root);
+		}else if (ch == 't'){
+			postOrder(root);
 			cout<<endl;
 		}else if (ch == 'd'){
-			int data;
-			cin>>data;
-			root = removeNode(root,data);
-		}else if ( ch == 'h'){
-			cout<<height(root)<<endl;
+			int num;
+			cin>>num;
+			root = removeNode(root,num);
 		}
+		
 	}while(ch != 'x');
 	return 0;
 }
+
