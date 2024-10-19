@@ -160,6 +160,12 @@ bool isComplete(Node* root) {
     return true;
 }
 
+int countNodes(Node* root) {
+    if (root == NULL) return 0;
+
+    return 1 + countNodes(root->left) + countNodes(root->right);
+}
+
 
 int main(){
 	Node *root = NULL;
@@ -201,7 +207,9 @@ int main(){
             } else {
                 cout << "BST not complete" << endl;
             }
-        }
+        }else if (ch == 'j'){
+        	cout<<countNodes(root)<<endl;
+		}
 	}while(ch != 'x');
 	return 0;
 }
